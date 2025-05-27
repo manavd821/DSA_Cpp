@@ -58,6 +58,11 @@ class Queue{
             return arr[front];
         }
     }
+    ~Queue(){
+        while(!IsEmpty()){
+            pop();
+        }
+    }
 };
 int main(){
     Queue que = Queue(5);

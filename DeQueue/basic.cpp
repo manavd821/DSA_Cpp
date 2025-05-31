@@ -19,6 +19,10 @@ class Dequeue{
         }
         else{//Not Empty
             Node* temp = new Node(x);
+            if(!temp){
+                std::cout<<"Dequeue Overflow!\n";
+                return;
+            }
             temp->next = front;
             front->prev = temp;
             front = temp;
@@ -32,6 +36,10 @@ class Dequeue{
         }
         else{//not empty
             Node* temp = new Node(x);
+            if(!temp){
+                std::cout<<"Dequeue Overflow!\n";
+                return;
+            }
             rear->next = temp;
             temp->prev = rear;
             rear = temp;

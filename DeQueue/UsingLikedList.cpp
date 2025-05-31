@@ -8,10 +8,15 @@ class Node{
 };
 class Dequeue{
     Node* front, *rear;
+    int size;
     public:
     Dequeue(){
         front = rear = NULL;
+        size = 0;
     };
+    int getSize(){
+        return size;
+    }
     void push_front(int x){
         if(!front){//empty
             front = new Node(x);
@@ -27,6 +32,7 @@ class Dequeue{
             front->prev = temp;
             front = temp;
         }
+            size++;
         std::cout<<x<<" is successfully pushed!\n";
     }
     void push_back(int x){
@@ -44,6 +50,7 @@ class Dequeue{
             temp->prev = rear;
             rear = temp;
         }
+            size++;
         std::cout<<x<<" is successfully pushed!\n";
     }
     void pop_front(){
@@ -57,6 +64,7 @@ class Dequeue{
             if(!front) rear = NULL;
             else front->prev = NULL;
         std::cout<<"pop front is successfully done!\n";
+            size--;
         }
     }
     void pop_back(){
@@ -70,6 +78,7 @@ class Dequeue{
             if(!rear) front = NULL;
             else rear->next = NULL;
         std::cout<<"pop back is successfully done!\n";
+            size--;
         }
     }
     int start(){

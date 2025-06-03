@@ -1,9 +1,7 @@
-// In-order Traversal (LNR) of a binary tree is a common traversal method where the order of visiting nodes is:
-// 1. Traverse the left subtree (L) 
-// 2. Visit the root node (N)
-// 3. Traverse the right subtree (R)
-#include<iostream>
-#include<vector>
+// level order traversal of a binary tree using a queue
+#include <iostream>
+#include <vector>
+#include <queue>
 class Node{
     public:
     int data;
@@ -12,7 +10,7 @@ class Node{
     Node(int val):data(val),left(nullptr),right(nullptr){};
 };
 Node* createBinaryTree(){
-    int x;;
+    int x;
     std::cin>>x;
     if(x == -1){
         return NULL;
@@ -24,25 +22,27 @@ Node* createBinaryTree(){
     temp->right = createBinaryTree();
     return temp;
 }
-void LNR(Node* root, std::vector<int>&ans){
-        if(!root){
-            return;
-        }
-        //left side
-        LNR(root->left, ans);
-        ans.push_back(root->data);
-        LNR(root->right, ans);
+std::vector<int> levelOrder(Node* root) {
+    std::vector<int>ans;
+    if(!root) return ans;
+    std::queue<Node*>q;
+    q.push(root);
+    while(!q.empty()){
+        ans.push_back(q.front()->data);
+        
+        if(q.front()->left) q.push(q.front()->left);
+        
+        if(q.front()->right) q.push(q.front()->right);
+        
+        q.pop();
     }
-std::vector<int> inOrder(Node* root) {
-    std::vector<int> ans;
-    LNR(root, ans);
     return ans;
 }
 int main(){
     std::cout<<"Enter root:";
     Node* root = createBinaryTree();
-    std::vector<int> ans = inOrder(root);
-    std::cout<<"In-order Traversal (LNR): ";
+    std::vector<int> ans = levelOrder(root);
+    std::cout<<"Level-order Traversal: ";
     for(int i=0;i<ans.size();i++){
         std::cout<<ans[i]<<" ";
     }
